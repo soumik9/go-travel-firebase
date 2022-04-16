@@ -9,6 +9,12 @@
     letter-spacing: 1px;
 }
 
+.navbar-brand:hover{
+    letter-spacing: 2px;
+    transform: rotate(360deg);
+    transition: 1s ease-in;
+}
+
 .nav-link{
     font-size: 16px;
     font-weight: 500;
