@@ -1,5 +1,10 @@
 footer{
-    height: 100px;
+    height: 120px;
     color: white;
     background-color: #2980b9;
+}
+
+.footer__icons{
+    font-size: 24px;
+    cursor: pointer;
 }
