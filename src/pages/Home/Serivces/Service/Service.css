@@ -5,6 +5,7 @@
 .card-img-top{
     border: 2px dotted #0abde3;
     border-radius: 4px;
+    height: 300px;
 }
 
 .card-body{
@@ -17,8 +18,13 @@
     color: #0abde3;
 }
 
+.card-price{
+    font-weight: bold;
+}
+
 .card-text{
     text-align: justify;
+    font-size: 14px;
 }
 
 .service__btn{

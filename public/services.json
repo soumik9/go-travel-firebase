@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "img": "https://i.ibb.co/68JXmc2/time-to-travel-and-flight-booking-vector-29639868.jpg",
+        "name": "Flight Bookings",
+        "price": 3000,
+        "description": "Ready for travelCheap Flights, Airline Tickets and Flight Deals. Compare 100s of Airlines Worldwide. Cheap Flights and Airline Tickets. Book the Best Flight for Your Next Destination"
+    },
+    {
+        "id": 2,
+        "img": "https://i.ibb.co/68JXmc2/time-to-travel-and-flight-booking-vector-29639868.jpg",
+        "name": "Ready for travel",
+        "price": 4500,
+        "description": "Ready for travel"
+    },
+    {
+        "id": 3,
+        "img": "https://i.ibb.co/68JXmc2/time-to-travel-and-flight-booking-vector-29639868.jpg",
+        "name": "Ready for travel",
+        "price": 1000,
+        "description": "Ready for travel"
+    }
+]
