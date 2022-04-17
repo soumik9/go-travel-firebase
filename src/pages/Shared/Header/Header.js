@@ -15,8 +15,8 @@ const Header = () => {
                         <Nav className="ms-md-auto text-center">
                             <Nav.Link as={Link} to="/">Home</Nav.Link>
                             <Nav.Link as={Link} to="/blogs">Blogs</Nav.Link>
-                            <Nav.Link as={Link} to="/">Sign In</Nav.Link>
-                            <Nav.Link as={Link} to="/blogs">Sign Up</Nav.Link>
+                            <Nav.Link as={Link} to="/login">Sign In</Nav.Link>
+                            <Nav.Link as={Link} to="/register">Sign Up</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
 
