@@ -5,28 +5,45 @@ import {SiFacebook} from 'react-icons/si'
 import {AiFillTwitterCircle} from 'react-icons/ai'
 import {FcGoogle} from 'react-icons/fc'
 import {RiLoginCircleLine} from 'react-icons/ri'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+    let location = useLocation();
+    let navigate = useNavigate();
+
+    let from = location.state?.from?.pathname || "/";
+
+    const handleEmailPasswordLogin = (event) => {
+        event.preventDefault();
+    
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        console.log(password);
+
+        //navigate(from, { replace: true });
+       
+    }
+
     return (
         <div className="form__container my-5">
             <Container>
                 <Row className='justify-content-center align-items-center'>
                     <Col md={6} lg={5}>
 
-                        <div className="form card ">
+                        <form className="form card" onSubmit={handleEmailPasswordLogin}>
 
                             <div className="d-flex justify-content-center">
                                 <div><h2 className="form__title ">Login</h2></div> 
                             </div>
                             
                             <FloatingLabel
-                                controlId="floatingInput"
+                                controlId="email"
                                 label="Email address"
                                 className="mb-3">
-                                <Form.Control type="email" placeholder="name@example.com" />
+                                <Form.Control type="email" placeholder="soumik@example.com" />
                             </FloatingLabel>
-                            <FloatingLabel controlId="floatingPassword" label="Password">
+                            <FloatingLabel controlId="password" label="Password">
                                 <Form.Control type="password" placeholder="Password" />
                             </FloatingLabel>
 
@@ -37,7 +54,7 @@ const Login = () => {
                             </div>
 
 
-                            <button className='btn form__btn'>
+                            <button className='btn form__btn' type="submit">
                                 Login 
                                 <RiLoginCircleLine className='form__btn-icon' />
                             </button>
@@ -69,7 +86,7 @@ const Login = () => {
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
 
                     </Col>
                 </Row>
