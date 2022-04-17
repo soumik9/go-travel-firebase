@@ -1,0 +1,91 @@
+.form__title {
+    color: #0abde3;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #0abde3;
+    width: max-content;
+}
+
+.form {
+    padding: 2rem 1rem;
+    border-radius: 7px;
+    box-shadow: 3px 3px 5px 1px rgba(67, 120, 111, 0.75);
+    -webkit-box-shadow: 3px 3px 5px 1px rgba(67, 120, 111, 0.75);
+    -moz-box-shadow: 3px 3px 5px 1px rgba(67, 120, 111, 0.75);
+}
+
+.form-check-input:checked {
+    background-color: #0abde3 !important;
+    border-color: #0abde3 !important;
+}
+
+.form__btn {
+    width: 100%;
+    background-color: #0abde3 !important;
+    border-color: #0abde3 !important;
+    color: white !important;
+    padding: 0.7rem 0;
+}
+
+.form__btn:hover {
+    background-color: #2980b9 !important;
+    border-color: #2980b9 !important;
+    transition: 0.5s ease-in;
+}
+
+.form__btn-icon {
+    font-size: 22px;
+    margin-left: 0.4rem;
+    position: relative;
+    top: -1px;
+}
+
+.form__or-hr {
+    color: #2980b9;
+}
+
+.or {
+    font-weight: 600;
+}
+
+.form__detail a {
+    color: #2980b9;
+    text-decoration: none;
+}
+
+.form__detail a:hover {
+    color: #0abde3;
+}
+
+.form__socials button {
+    outline: none;
+    border: none;
+    background-color: white;
+}
+
+.form__socials-icon {
+    font-size: 48px;
+    padding: 1px;
+}
+
+.form__socials-icon:hover {
+    border: 2px solid #2980b9;
+    border-radius: 50%;
+    transition: 0.5s ease-in-out;
+}
+
+.facebook__icon{
+    color: #4267B2;
+}
+
+.twitter__icon{
+    position: relative;
+    top: -2px;
+    font-size: 54px;
+    color: #1DA1F2;
+}
+
+.google__icon{
+    font-size: 54px;
+}
