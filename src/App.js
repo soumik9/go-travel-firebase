@@ -3,6 +3,7 @@ import './App.css';
 import Blogs from './pages/Blogs/Blogs';
 import Home from './pages/Home/Home/Home';
 import NotFound from './pages/NotFound/NotFound';
+import Footer from './pages/Shared/Footer/Footer';
 import Header from './pages/Shared/Header/Header';
 
 function App() {
@@ -16,6 +17,8 @@ function App() {
         <Route path="blogs" element={<Blogs></Blogs>} />
         <Route path="*" element={<NotFound></NotFound>} />
       </Routes>
+
+      <Footer></Footer>
 
     </div>
   );
