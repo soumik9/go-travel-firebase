@@ -14,13 +14,13 @@ const Slides = () => {
 
     return (
         <div className='slide__container'>
-            <Carousel variant="dark">
+            <Carousel>
                 {
                     slides.map(slide => (
                         <Carousel.Item  key={slide.id}>
                         <img 
-                            className="w-100 img-fluid"
-                            style={{ height:"550px" }}
+                            className="w-100 img-fluid slide-img"
+                            
                             src={slide.img}
                             alt={slide.title}
                         />

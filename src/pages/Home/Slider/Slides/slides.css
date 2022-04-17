@@ -1,3 +1,18 @@
 .slide__container{
     height: 450px !important;
 }
+
+.slide-img{
+    height: 550px !important;
+}
+
+@media only screen and (max-width: 576px) {
+    .slide-img{
+        height: 200px !important;
+    }
+}
+@media only screen and (max-width: 768px) and (min-width: 577px) {
+    .slide-img{
+        height: 350px !important;
+    }
+}
