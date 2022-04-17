@@ -2,7 +2,6 @@ import React from 'react';
 import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import '../auth.css'
 import {SiFacebook} from 'react-icons/si'
-// import {BsGithub} from 'react-icons/bs'
 import {AiFillTwitterCircle} from 'react-icons/ai'
 import {FcGoogle} from 'react-icons/fc'
 import {RiLoginCircleLine} from 'react-icons/ri'
