@@ -24,12 +24,14 @@ const Header = () => {
 
                             {
                                 user ?
-                                    <button onClick={ () => signOut(auth)}>Sign Out</button>
+                                    <button onClick={ () => signOut(auth)} className='btn sign__out-btn'>Sign Out</button>
                                 : <Nav.Link as={Link} to="/login">Sign In</Nav.Link>
-                               
                             }
 
-{/* <Nav.Link as={Link} to="/register">Sign Up</Nav.Link> */}
+                            {
+                                !user && <Nav.Link as={Link} to="/register">Sign Up</Nav.Link>
+                            }
+
 
                         </Nav>
                     </Navbar.Collapse>
