@@ -36,6 +36,11 @@
     border-radius: 2px;
 }
 
+.active-nav{
+    color: #0abde3 !important;
+    text-decoration: underline;
+}
+
 .sign__out-btn{
     background-color: #0abde3 !important;
     color: white !important;

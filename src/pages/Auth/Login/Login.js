@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import '../auth.css'
 import {RiLoginCircleLine} from 'react-icons/ri'
@@ -13,15 +13,14 @@ const Login = () => {
 
     let location = useLocation();
     let navigate = useNavigate();
+    let from = location.state?.from?.pathname || "/";
 
     const [valueError, setValueError] = useState("");
     const [signInWithEmailAndPassword, user, loading] = useSignInWithEmailAndPassword(auth);
     
-
-    useEffect( () => {
-        let from = location.state?.from?.pathname || "/";
-        if(user){ navigate(from, { replace: true }); }
-    }, [user])
+    if(user){ 
+        navigate(from, { replace: true }); 
+    }
 
     if(loading){ return <Loading></Loading> }
 
@@ -40,9 +39,6 @@ const Login = () => {
         }else{
             setValueError('');
             signInWithEmailAndPassword(email, password);
-            
-            // event.target.email.value = '';
-            // event.target.password.value = '';
   
             toast.success('User Successfully Logged!', {
                 duration: 1000,

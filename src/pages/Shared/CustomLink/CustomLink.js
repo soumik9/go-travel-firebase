@@ -8,8 +8,8 @@ const CustomLink = ({ children, to, ...props }: LinkProps) => {
 
     return (
         <div>
-            <Link className=''
-               style={{ textDecoration: match ? "underline" : "none" }}
+            <Link 
+                style={{ textDecoration: match ? "underline" : "none" }}
                 to={to}
                 {...props}
             >
