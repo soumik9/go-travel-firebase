@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import {GiCommercialAirplane} from 'react-icons/gi'
 import auth from '../../../firebase.init';
 import './header.css'
+import CustomLink from '../CustomLink/CustomLink';
 
 const Header = () => {
 
@@ -20,18 +21,18 @@ const Header = () => {
 
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-md-auto text-center">
-                            <Nav.Link as={Link} to="/">Home</Nav.Link>
-                            <Nav.Link as={Link} to="/blogs">Blogs</Nav.Link>
-                            <Nav.Link as={Link} to="/about">About</Nav.Link>
+                            <Nav.Link as={CustomLink} to="/">Home</Nav.Link>
+                            <Nav.Link as={CustomLink} to="/blogs">Blogs</Nav.Link>
+                            <Nav.Link as={CustomLink} to="/about">About</Nav.Link>
 
                             {
                                 user ?
                                     <button onClick={ () => signOut(auth)} className='btn sign__out-btn'>Sign Out</button>
-                                : <Nav.Link as={Link} to="/login">Sign In</Nav.Link>
+                                : <Nav.Link as={CustomLink} to="/login">Sign In</Nav.Link>
                             }
 
                             {
-                                !user && <Nav.Link as={Link} to="/register">Sign Up</Nav.Link>
+                                !user && <Nav.Link as={CustomLink} to="/register">Sign Up</Nav.Link>
                             }
 
 
