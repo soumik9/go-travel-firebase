@@ -24,6 +24,7 @@ const Register = () => {
         //const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
+        const confirmPassword = event.target.confirmPassword.value;
 
         if(email === '' && password === ''){
             setValueError("Email & Password filed is required");
@@ -31,8 +32,12 @@ const Register = () => {
             setValueError("Email filed is required");
         }else if(password === ''){
             setValueError("Password filed is required");
+        }else if(confirmPassword === ''){
+            setValueError("Confirm Password filed is required");
         }else if(password.length <6 ){
             setValueError("Password needs atleast 6 words");
+        }else if(confirmPassword !== password){
+            setValueError("Password did not matched");
         }else{
             setValueError('');
             const created = createUserWithEmailAndPassword(email, password);
@@ -41,6 +46,7 @@ const Register = () => {
                 event.target.name.value = '';
                 event.target.email.value = '';
                 event.target.password.value = '';
+                event.target.confirmPassword.value = '';
                 
                 toast.success('Successfully User created!', {
                     duration: 1000,
@@ -65,24 +71,11 @@ const Register = () => {
                                 <div><h2 className="form__title ">Register</h2></div> 
                             </div>
 
-                            
-                                {/* {
-                                    loading && <div className="form__spinner d-flex justify-content-center mb-3">
-                                                    <Spinner animation="border" role="status">
-                                                    <span className="visually-hidden">Loading...</span>
-                                                    </Spinner>
-                                                </div> 
-                                } */}
-                           
-                            
-                                {
-                                    valueError &&   <div className="form__error d-flex justify-content-center mb-3">
-                                                        <small className='text-danger'>{valueError}</small>
-                                                    </div>
-                                }
-
-                                
-                         
+                            {
+                                valueError &&   <div className="form__error d-flex justify-content-center mb-3">
+                                                    <small className='text-danger'>{valueError}</small>
+                                                </div>
+                            }
                             
                             <FloatingLabel
                                 controlId="name"
@@ -97,8 +90,13 @@ const Register = () => {
                                 className="mb-3">
                                 <Form.Control type="email" placeholder="soumik@example.com" />
                             </FloatingLabel>
-                            <FloatingLabel controlId="password" label="Password">
+
+                            <FloatingLabel controlId="password" label="Password" className="mb-3">
                                 <Form.Control type="password" placeholder="Password" />
+                            </FloatingLabel>
+
+                            <FloatingLabel controlId="confirmPassword" label="Confirm Password">
+                                <Form.Control type="password" placeholder="Confirm Password" />
                             </FloatingLabel>
 
                             <div className="form__terms d-flex justify-content-center">
