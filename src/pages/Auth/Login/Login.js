@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import '../auth.css'
-import {SiFacebook} from 'react-icons/si'
-import {AiFillTwitterCircle} from 'react-icons/ai'
-import {FcGoogle} from 'react-icons/fc'
 import {RiLoginCircleLine} from 'react-icons/ri'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
 
 const Login = () => {
 
     let location = useLocation();
     let navigate = useNavigate();
+    const [
+        signInWithEmailAndPassword,
+        user,
+        loading,
+        error,
+      ] = useSignInWithEmailAndPassword(auth);
+
+    const [valueError, setValueError] = useState("");
 
     let from = location.state?.from?.pathname || "/";
 
@@ -19,9 +27,33 @@ const Login = () => {
     
         const email = event.target.email.value;
         const password = event.target.password.value;
-        console.log(password);
 
-        //navigate(from, { replace: true });
+        if(email === '' && password === ''){
+            setValueError("Email & Password filed is required");
+        }else if(email === ''){
+            setValueError("Email filed is required");
+        }else if(password === ''){
+            setValueError("Password filed is required");
+        }else if(password.length <6 ){
+            setValueError("Password needs atleast 6 words");
+        }else{
+            setValueError('');
+            const logged = signInWithEmailAndPassword(email, password);
+
+            if(logged){
+                event.target.email.value = '';
+                event.target.password.value = '';
+                signInWithEmailAndPassword(email, password)
+
+                navigate(from, { replace: true });
+                
+                // toast.success('Successfully User created!', {
+                //     duration: 1000,
+                //     position: 'top-right',
+                // });
+            }
+        }
+
        
     }
 
@@ -36,6 +68,12 @@ const Login = () => {
                             <div className="d-flex justify-content-center">
                                 <div><h2 className="form__title ">Login</h2></div> 
                             </div>
+
+                            {
+                                valueError &&   <div className="form__error d-flex justify-content-center mb-3">
+                                                    <small className='text-danger'>{valueError}</small>
+                                                </div>
+                            }
                             
                             <FloatingLabel
                                 controlId="email"
@@ -69,23 +107,8 @@ const Login = () => {
                                 <div className='w-100 form__or-hr'><hr /></div>
                             </div>
 
-                            <div className="form__socials mt-2 d-flex justify-content-center">
-                                <div className='mx-3'>
-                                    <button>
-                                    <SiFacebook className='form__socials-icon facebook__icon' />
-                                    </button>
-                                </div>
-                                <div className='mx-3'>
-                                    <button>
-                                    <AiFillTwitterCircle className='form__socials-icon twitter__icon' />
-                                    </button>
-                                </div>
-                                <div className='mx-3'>
-                                    <button>
-                                    <FcGoogle className='form__socials-icon google__icon' />
-                                    </button>
-                                </div>
-                            </div>
+                            {/* social login components */}
+                            <SocialLogin></SocialLogin>
                         </form>
 
                     </Col>

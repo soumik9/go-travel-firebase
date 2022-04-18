@@ -1,39 +1,98 @@
-import React from 'react';
-import {SiFacebook} from 'react-icons/si'
-import {AiFillTwitterCircle} from 'react-icons/ai'
-import {FcGoogle} from 'react-icons/fc'
+import React, { useState } from 'react';
 import { FiUserCheck } from 'react-icons/fi'
 import { Link } from 'react-router-dom';
 import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import '../auth.css'
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import toast, { Toaster } from 'react-hot-toast';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Register = () => {
+
+    const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+    const [valueError, setValueError] = useState("");
+
+    const handleEmailPasswordSignUp = (event) => {
+        event.preventDefault();
+       
+        //const name = event.target.name.value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+
+        if(email === '' && password === ''){
+            setValueError("Email & Password filed is required");
+        }else if(email === ''){
+            setValueError("Email filed is required");
+        }else if(password === ''){
+            setValueError("Password filed is required");
+        }else if(password.length <6 ){
+            setValueError("Password needs atleast 6 words");
+        }else{
+            setValueError('');
+            const created = createUserWithEmailAndPassword(email, password);
+
+            if(created){
+                event.target.name.value = '';
+                event.target.email.value = '';
+                event.target.password.value = '';
+                
+                toast.success('Successfully User created!', {
+                    duration: 1000,
+                    position: 'top-right',
+                });
+            }
+        }
+    }
+
+
     return (
         <div className="form__container my-5">
             <Container>
                 <Row className='justify-content-center align-items-center'>
                     <Col md={6} lg={5}>
 
-                        <div className="form card ">
+                        <form className="form card" onSubmit={handleEmailPasswordSignUp}>
+
+                            <Toaster  />
 
                             <div className="d-flex justify-content-center">
                                 <div><h2 className="form__title ">Register</h2></div> 
                             </div>
+
+                            
+                                {/* {
+                                    loading && <div className="form__spinner d-flex justify-content-center mb-3">
+                                                    <Spinner animation="border" role="status">
+                                                    <span className="visually-hidden">Loading...</span>
+                                                    </Spinner>
+                                                </div> 
+                                } */}
+                           
+                            
+                                {
+                                    valueError &&   <div className="form__error d-flex justify-content-center mb-3">
+                                                        <small className='text-danger'>{valueError}</small>
+                                                    </div>
+                                }
+
+                                
+                         
                             
                             <FloatingLabel
                                 controlId="name"
                                 label="Your Name"
                                 className="mb-3">
-                                <Form.Control type="email" placeholder="Soumik Ahammed" />
+                                <Form.Control type="text" placeholder="Soumik Ahammed" />
                             </FloatingLabel>
 
                             <FloatingLabel
-                                controlId="floatingInput"
+                                controlId="email"
                                 label="Email address"
                                 className="mb-3">
                                 <Form.Control type="email" placeholder="soumik@example.com" />
                             </FloatingLabel>
-                            <FloatingLabel controlId="floatingPassword" label="Password">
+                            <FloatingLabel controlId="password" label="Password">
                                 <Form.Control type="password" placeholder="Password" />
                             </FloatingLabel>
 
@@ -59,24 +118,10 @@ const Register = () => {
                                 <div className='w-100 form__or-hr'><hr /></div>
                             </div>
 
-                            <div className="form__socials mt-2 d-flex justify-content-center">
-                                <div className='mx-3'>
-                                    <button>
-                                    <SiFacebook className='form__socials-icon facebook__icon' />
-                                    </button>
-                                </div>
-                                <div className='mx-3'>
-                                    <button>
-                                    <AiFillTwitterCircle className='form__socials-icon twitter__icon' />
-                                    </button>
-                                </div>
-                                <div className='mx-3'>
-                                    <button>
-                                    <FcGoogle className='form__socials-icon google__icon' />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                            {/* social login components */}
+                            <SocialLogin></SocialLogin>
+
+                        </form>
 
                     </Col>
                 </Row>
