@@ -6,21 +6,19 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
+import toast from 'react-hot-toast';
 
 const Login = () => {
 
     let location = useLocation();
     let navigate = useNavigate();
-    const [
-        signInWithEmailAndPassword,
-        user,
-        loading,
-        error,
-      ] = useSignInWithEmailAndPassword(auth);
+    let from = location.state?.from?.pathname || "/";
 
     const [valueError, setValueError] = useState("");
+    const [signInWithEmailAndPassword, user] = useSignInWithEmailAndPassword(auth);
+    
 
-    let from = location.state?.from?.pathname || "/";
+    if(user){ navigate(from, { replace: true }); }
 
     const handleEmailPasswordLogin = (event) => {
         event.preventDefault();
@@ -34,24 +32,18 @@ const Login = () => {
             setValueError("Email filed is required");
         }else if(password === ''){
             setValueError("Password filed is required");
-        }else if(password.length <6 ){
-            setValueError("Password needs atleast 6 words");
         }else{
             setValueError('');
-            const logged = signInWithEmailAndPassword(email, password);
+            signInWithEmailAndPassword(email, password);
+            
+            // event.target.email.value = '';
+            // event.target.password.value = '';
+  
+            toast.success('User Successfully Logged!', {
+                duration: 1000,
+                position: 'top-right',
+            });
 
-            if(logged){
-                event.target.email.value = '';
-                event.target.password.value = '';
-                signInWithEmailAndPassword(email, password)
-
-                navigate(from, { replace: true });
-                
-                // toast.success('Successfully User created!', {
-                //     duration: 1000,
-                //     position: 'top-right',
-                // });
-            }
         }
 
        

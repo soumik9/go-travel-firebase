@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiUserCheck } from 'react-icons/fi'
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import '../auth.css'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -10,8 +10,13 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Register = () => {
 
-    const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth);
     const [valueError, setValueError] = useState("");
+    let navigate = useNavigate();
+
+    if(user){
+        navigate('/');
+    }
 
     const handleEmailPasswordSignUp = (event) => {
         event.preventDefault();
