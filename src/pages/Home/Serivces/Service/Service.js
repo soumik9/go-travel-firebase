@@ -10,7 +10,7 @@ const Service = ({ service }) => {
 
     return (
         <Col md={4} sm={12}>
-            <Card className='p-1'>
+            <Card className='p-1 my-3 my-md-0'>
                 <Card.Img variant="top" src={img} />
                 <Card.Body className='text-center'>
                     <Card.Title>{name}</Card.Title>
