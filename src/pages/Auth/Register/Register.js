@@ -7,14 +7,15 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import toast, { Toaster } from 'react-hot-toast';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import Loading from '../../Shared/Loading/Loading';
 
 const Register = () => {
 
-    const [createUserWithEmailAndPassword, user] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, loading] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
     const [valueError, setValueError] = useState("");
     let navigate = useNavigate();
 
-    if(user){ navigate('/'); }
+    if(loading){ return <Loading></Loading>}
 
     const handleEmailPasswordSignUp = (event) => {
         event.preventDefault();
@@ -46,6 +47,8 @@ const Register = () => {
                 event.target.password.value = '';
                 event.target.confirmPassword.value = '';
                 
+                navigate('/');
+
                 toast.success('Successfully User created!', {
                     duration: 1000,
                     position: 'top-right',
