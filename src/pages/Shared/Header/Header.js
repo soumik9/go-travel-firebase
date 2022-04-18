@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import {GiCommercialAirplane} from 'react-icons/gi'
 import auth from '../../../firebase.init';
 import './header.css'
 
@@ -14,7 +15,7 @@ const Header = () => {
         <div>
             <Navbar expand="lg" className='shadow-sm'>
                 <Container>
-                    <Navbar.Brand as={Link} to="/"> <i>Go T</i>ravel</Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/"> <i>Go <span><GiCommercialAirplane className='navbar-brand-icon' /></span> T</i>ravel </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
                     <Navbar.Collapse id="basic-navbar-nav">

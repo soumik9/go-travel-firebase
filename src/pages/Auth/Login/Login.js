@@ -7,6 +7,7 @@ import SocialLogin from '../SocialLogin/SocialLogin';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import toast, { Toaster } from 'react-hot-toast';
+import Loading from '../../Shared/Loading/Loading';
 
 const Login = () => {
 
@@ -14,13 +15,15 @@ const Login = () => {
     let navigate = useNavigate();
 
     const [valueError, setValueError] = useState("");
-    const [signInWithEmailAndPassword, user] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword, user, loading] = useSignInWithEmailAndPassword(auth);
     
 
     useEffect( () => {
         let from = location.state?.from?.pathname || "/";
         if(user){ navigate(from, { replace: true }); }
     }, [user])
+
+    if(loading){ return <Loading></Loading> }
 
     const handleEmailPasswordLogin = (event) => {
         event.preventDefault();
