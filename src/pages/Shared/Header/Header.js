@@ -21,6 +21,7 @@ const Header = () => {
                         <Nav className="ms-md-auto text-center">
                             <Nav.Link as={Link} to="/">Home</Nav.Link>
                             <Nav.Link as={Link} to="/blogs">Blogs</Nav.Link>
+                            <Nav.Link as={Link} to="/about">About</Nav.Link>
 
                             {
                                 user ?
