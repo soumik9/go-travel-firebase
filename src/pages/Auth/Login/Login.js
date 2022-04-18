@@ -6,7 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
 
@@ -50,6 +50,9 @@ const Login = () => {
 
     return (
         <div className="form__container my-5">
+
+            <Toaster></Toaster>
+
             <Container>
                 <Row className='justify-content-center align-items-center'>
                     <Col md={6} lg={5}>
@@ -92,7 +95,10 @@ const Login = () => {
                             </form>
 
                             <div className="form__detail mt-3 d-flex justify-content-center">
-                                <p>If you haven't account <Link to="/register">Create account here</Link></p>
+                                <div>
+                                    <p>If you haven't account <Link to="/register">Create account here</Link></p>
+                                    <p className='text-center'>Forgot Password <Link to="/reset">Reset here</Link></p>
+                                </div>
                             </div>
 
                             <div className="form__or d-flex">
