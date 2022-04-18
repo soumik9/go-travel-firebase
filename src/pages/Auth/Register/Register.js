@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiUserCheck } from 'react-icons/fi'
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import '../auth.css'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -14,9 +14,7 @@ const Register = () => {
     const [valueError, setValueError] = useState("");
     let navigate = useNavigate();
 
-    if(user){
-        navigate('/');
-    }
+    if(user){ navigate('/'); }
 
     const handleEmailPasswordSignUp = (event) => {
         event.preventDefault();
@@ -63,7 +61,7 @@ const Register = () => {
                 <Row className='justify-content-center align-items-center'>
                     <Col md={6} lg={5}>
 
-                        <form className="form card" onSubmit={handleEmailPasswordSignUp}>
+                        <div className="card" >
 
                             <Toaster  />
 
@@ -72,44 +70,47 @@ const Register = () => {
                             </div>
 
                             {
+                                // checking all errors and if any error shows here
                                 valueError &&   <div className="form__error d-flex justify-content-center mb-3">
                                                     <small className='text-danger'>{valueError}</small>
                                                 </div>
                             }
                             
-                            <FloatingLabel
-                                controlId="name"
-                                label="Your Name"
-                                className="mb-3">
-                                <Form.Control type="text" placeholder="Soumik Ahammed" />
-                            </FloatingLabel>
+                            <form onSubmit={handleEmailPasswordSignUp}>
+                                <FloatingLabel
+                                    controlId="name"
+                                    label="Your Name"
+                                    className="mb-3">
+                                    <Form.Control type="text" placeholder="Soumik Ahammed" />
+                                </FloatingLabel>
 
-                            <FloatingLabel
-                                controlId="email"
-                                label="Email address"
-                                className="mb-3">
-                                <Form.Control type="email" placeholder="soumik@example.com" />
-                            </FloatingLabel>
+                                <FloatingLabel
+                                    controlId="email"
+                                    label="Email address"
+                                    className="mb-3">
+                                    <Form.Control type="email" placeholder="soumik@example.com" />
+                                </FloatingLabel>
 
-                            <FloatingLabel controlId="password" label="Password" className="mb-3">
-                                <Form.Control type="password" placeholder="Password" />
-                            </FloatingLabel>
+                                <FloatingLabel controlId="password" label="Password" className="mb-3">
+                                    <Form.Control type="password" placeholder="Password" />
+                                </FloatingLabel>
 
-                            <FloatingLabel controlId="confirmPassword" label="Confirm Password">
-                                <Form.Control type="password" placeholder="Confirm Password" />
-                            </FloatingLabel>
+                                <FloatingLabel controlId="confirmPassword" label="Confirm Password">
+                                    <Form.Control type="password" placeholder="Confirm Password" />
+                                </FloatingLabel>
 
-                            <div className="form__terms d-flex justify-content-center">
-                                <Form.Group className="my-3" id="formGridCheckbox">
-                                    <Form.Check inline type="checkbox" id='remember' label="Agree to terms & conditions" />
-                                </Form.Group>
-                            </div>
+                                <div className="form__terms d-flex justify-content-center">
+                                    <Form.Group className="my-3" id="formGridCheckbox">
+                                        <Form.Check inline type="checkbox" id='remember' label="Agree to terms & conditions" />
+                                    </Form.Group>
+                                </div>
 
 
-                            <button className='btn form__btn'>
-                                Register 
-                                <FiUserCheck className='form__btn-icon ms-2' style={{ fontSize: "18px" }} />
-                            </button>
+                                <button className='btn form__btn'>
+                                    Register 
+                                    <FiUserCheck className='form__btn-icon ms-2' style={{ fontSize: "18px" }} />
+                                </button>
+                            </form>
 
                             <div className="form__detail mt-3 d-flex justify-content-center">
                                 <p>Already have account <Link to="/login">Login here</Link></p>
@@ -124,7 +125,7 @@ const Register = () => {
                             {/* social login components */}
                             <SocialLogin></SocialLogin>
 
-                        </form>
+                        </div>
 
                     </Col>
                 </Row>

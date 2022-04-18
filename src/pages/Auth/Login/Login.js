@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import '../auth.css'
 import {RiLoginCircleLine} from 'react-icons/ri'
@@ -12,13 +12,15 @@ const Login = () => {
 
     let location = useLocation();
     let navigate = useNavigate();
-    let from = location.state?.from?.pathname || "/";
 
     const [valueError, setValueError] = useState("");
     const [signInWithEmailAndPassword, user] = useSignInWithEmailAndPassword(auth);
     
 
-    if(user){ navigate(from, { replace: true }); }
+    useEffect( () => {
+        let from = location.state?.from?.pathname || "/";
+        if(user){ navigate(from, { replace: true }); }
+    }, [user])
 
     const handleEmailPasswordLogin = (event) => {
         event.preventDefault();
@@ -43,10 +45,7 @@ const Login = () => {
                 duration: 1000,
                 position: 'top-right',
             });
-
-        }
-
-       
+        } 
     }
 
     return (
@@ -55,39 +54,42 @@ const Login = () => {
                 <Row className='justify-content-center align-items-center'>
                     <Col md={6} lg={5}>
 
-                        <form className="form card" onSubmit={handleEmailPasswordLogin}>
+                        <div className="card" >
 
                             <div className="d-flex justify-content-center">
                                 <div><h2 className="form__title ">Login</h2></div> 
                             </div>
 
                             {
+                                 // checking all errors and if any error shows here
                                 valueError &&   <div className="form__error d-flex justify-content-center mb-3">
                                                     <small className='text-danger'>{valueError}</small>
                                                 </div>
                             }
                             
-                            <FloatingLabel
-                                controlId="email"
-                                label="Email address"
-                                className="mb-3">
-                                <Form.Control type="email" placeholder="soumik@example.com" />
-                            </FloatingLabel>
-                            <FloatingLabel controlId="password" label="Password">
-                                <Form.Control type="password" placeholder="Password" />
-                            </FloatingLabel>
+                            <form onSubmit={handleEmailPasswordLogin}>
+                                <FloatingLabel
+                                    controlId="email"
+                                    label="Email address"
+                                    className="mb-3">
+                                    <Form.Control type="email" placeholder="soumik@example.com" />
+                                </FloatingLabel>
+                                <FloatingLabel controlId="password" label="Password">
+                                    <Form.Control type="password" placeholder="Password" />
+                                </FloatingLabel>
 
-                            <div className="form__terms d-flex justify-content-center">
-                                <Form.Group className="my-3" id="formGridCheckbox">
-                                    <Form.Check inline type="checkbox" id='remember' label="Remember Me" />
-                                </Form.Group>
-                            </div>
+                                <div className="form__terms d-flex justify-content-center">
+                                    <Form.Group className="my-3" id="formGridCheckbox">
+                                        <Form.Check inline type="checkbox" id='remember' label="Remember Me" />
+                                    </Form.Group>
+                                </div>
 
 
-                            <button className='btn form__btn' type="submit">
-                                Login 
-                                <RiLoginCircleLine className='form__btn-icon' />
-                            </button>
+                                <button className='btn form__btn' type="submit">
+                                    Login 
+                                    <RiLoginCircleLine className='form__btn-icon' />
+                                </button>
+                            </form>
 
                             <div className="form__detail mt-3 d-flex justify-content-center">
                                 <p>If you haven't account <Link to="/register">Create account here</Link></p>
@@ -101,7 +103,7 @@ const Login = () => {
 
                             {/* social login components */}
                             <SocialLogin></SocialLogin>
-                        </form>
+                        </div>
 
                     </Col>
                 </Row>
