@@ -1,0 +1,24 @@
+.contactus__container{
+    margin: 5rem 0 4rem 0;
+}
+
+.contactus__container-title h2{
+    color: #0abde3;
+    text-transform: uppercase;
+    border-bottom: 2px solid #2980b9;
+    width: max-content;
+}
+
+.contactus__btn{
+    width: 100%;
+    background-color: #0abde3 !important;
+    border-color: #0abde3 !important;
+    color: white !important;
+    padding: 0.7rem 0 !important;
+}
+
+.contactus__btn:hover{
+    background-color: #2980b9 !important;
+    border-color: #2980b9 !important;
+    transition: 0.5s ease-in;
+}
